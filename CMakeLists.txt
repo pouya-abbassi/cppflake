@@ -16,14 +16,15 @@ set(QRCODEGEN_DIR "" CACHE STRING "Some user-specified option")
 
 #find_package(qrcodegen REQUIRED)
 
-add_library(qrcodegen STATIC
-  #${SOURCE_DIR}/qrcodegen.h
-  ${QRCODEGEN_DIR}/qrcodegen.cpp)
+#add_library(qrcodegen STATIC
+#  #${SOURCE_DIR}/qrcodegen.h
+#  ${QRCODEGEN_DIR}/qrcodegen.cpp)
 #find_package(qrcodegen REQUIRED)
 #find_package(PkgConfig REQUIRED)
 #pkg_check_modules(qrcodegen REQUIRED qrcodegen)
 
 add_executable(main main.cpp)
+target_link_directories(main PRIVATE QRCODEGEN_DIR)
 target_link_libraries(main PRIVATE qrcodegen)
 #target_link_libraries(main PRIVATE qrcodegen::qrcodegen)
 

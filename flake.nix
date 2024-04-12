@@ -17,8 +17,6 @@
           pkg-config
         ]);
 
-        qrcodegen = pkgs: pkgs.qrcodegen;
-        imgui = pkgs: pkgs.imgui;
         #deps = [ pkgs.qrcodegen ];
 
       in {
@@ -26,8 +24,8 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = buildToolsDeps;
           buildInputs = [
-            (qrcodegen pkgs)
-            (imgui pkgs)
+            pkgs.qrcodegen
+            pkgs.imgui
           ];
           shellHook =
             ''
@@ -36,7 +34,8 @@
         };
 
         packages.default = pkgs.callPackage ./nix/hello-world.nix {
-          qrcodegen = qrcodegen imgui pkgs;
+          #qrcodegen = pkgs.qrcodegen;
+          #imgui = pkgs.imgui;
         };
       }
     );
