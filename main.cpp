@@ -32,7 +32,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "qrcodegen.h"
+#include <qrcodegen/qrcodegen.h>
 
 using std::uint8_t;
 using qrcodegen::QrCode;

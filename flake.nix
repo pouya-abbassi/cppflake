@@ -17,6 +17,9 @@
           pkg-config
         ]);
 
+        #qrcodegen = pkgs.qrcodegen.overrideDerivation (oldAttrs: {
+        #  sourceRoot = "${oldAttrs.src.name}/cpp";
+        #});
         #deps = [ pkgs.qrcodegen ];
 
       in {
@@ -24,7 +27,7 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = buildToolsDeps;
           buildInputs = [
-            pkgs.qrcodegen
+            #qrcodegen
             pkgs.imgui
           ];
           shellHook =

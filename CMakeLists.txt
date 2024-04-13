@@ -13,7 +13,7 @@ project(main
 
 #option(QRCODEGEN_DIR "orcodegen directory" STRING)
 set(QRCODEGEN_DIR "" CACHE STRING "Some user-specified option")
-
+message(STATUS "......> ${QRCODEGEN_DIR}")
 #find_package(qrcodegen REQUIRED)
 
 #add_library(qrcodegen STATIC
@@ -24,7 +24,7 @@ set(QRCODEGEN_DIR "" CACHE STRING "Some user-specified option")
 #pkg_check_modules(qrcodegen REQUIRED qrcodegen)
 
 add_executable(main main.cpp)
-target_link_directories(main PRIVATE QRCODEGEN_DIR)
+target_include_directories(main PRIVATE "${QRCODEGEN_DIR}/include/")
 target_link_libraries(main PRIVATE qrcodegen)
 #target_link_libraries(main PRIVATE qrcodegen::qrcodegen)
 
