@@ -17,9 +17,16 @@
           pkg-config
         ]);
 
-        #qrcodegen = pkgs.qrcodegen.overrideDerivation (oldAttrs: {
-        #  sourceRoot = "${oldAttrs.src.name}/cpp";
-        #});
+        qrcodegen = pkgs.qrcodegen.overrideDerivation (oldAttrs: {
+          sourceRoot = "${oldAttrs.src.name}/cpp";
+          checkPhase = "";
+          installPhase = ''
+            runHook preInstall
+            install -Dt $out/include/qrcodegen/ qrcodegen.hpp
+            install -Dt $out/include/qrcodegen/ qrcodegen.cpp
+            runHook postInstall
+          '';
+        });
         #deps = [ pkgs.qrcodegen ];
 
       in {
@@ -39,6 +46,7 @@
         packages.default = pkgs.callPackage ./nix/hello-world.nix {
           #qrcodegen = pkgs.qrcodegen;
           #imgui = pkgs.imgui;
+          inherit qrcodegen;
         };
       }
     );
